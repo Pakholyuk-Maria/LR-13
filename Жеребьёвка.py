@@ -3,7 +3,7 @@ import random
 #Ввод и проверка значения N
 while True :
     try:      
-        N = int(input('''Введите целое число > 0:\n
+        N = int(input('''Введите число бочонков, которое хотите положить в мешок:
 (для выхода нажмите 0)\n'''))
     except ValueError: 
         N = 'error'
@@ -16,12 +16,29 @@ while True :
         continue
     elif N == 0 :   
         break
-    print('Выпавшие номера бочонков: ')
     bag = []
-    while len(bag) != N:
-        x = random.randint(1, N)
-        if x in bag:
-            continue
-        elif x not in bag:
-            bag.append(x)
-            print(x)
+    choise = ''
+    while choise != 'n':
+        try:    
+            choise = input('''Если хотите вытянуть бочонок, введите "y"
+если нет - "n" ''')
+        except ValueError:
+            choise = 'error'
+        if choise == 'error':
+            print('Попробуйте еще раз.')
+        elif choise == 'y':
+            x = random.randint(1, N)
+            if len(bag) == N and x in bag:
+                print('В мешке больше нет бочонков.')
+                continue   
+            elif x not in bag:
+                bag.append(x)
+                print('Выпавший номер бочонка:', x)
+            elif x in bag:
+                while x in bag:
+                    x = random.randint(1, N)
+                bag.append(x)
+                print('Выпавший номер бочонка:', x)
+        elif choise == 'n':
+            break
+        
