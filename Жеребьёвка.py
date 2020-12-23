@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 import random
 #Ввод и проверка значения N
-while True :
-    try:      
-        N = int(input('''Введите число бочонков, которое хотите положить в мешок:
+while True : # Цикл вып-ся пока пользователь не введёт 0
+    try: # Ввод и проверка значения N
+        N = int(input('''Введите число бочонков, которое хотите положить в мешок: 
 (для выхода нажмите 0)\n'''))
     except ValueError: 
         N = 'error'
@@ -12,33 +12,32 @@ while True :
         print('Попробуйте еще раз.')
         continue
     elif N < 0 :
-        print('Число число должно быть больше 8')
+        print('Число число должно быть больше 0')
         continue
-    elif N == 0 :   
+    elif N == 0 : 
         break
-    bag = []
-    choise = ' '
-    while choise != 'n':
-        try:    
+    bag = [] # Список, который пополняется случайными числами 
+    choise = '' # переменная для вводимых значений n или y
+    while choise != 'n': #Цикл выполняется пока пользовател не введёт n
+        try: # проверка вводимого значения choise
             choise = input('''Если хотите вытянуть бочонок, введите "y"
-если нет - "n" ''')
+                           если нет - "n" ''')
         except ValueError:
             choise = 'error'
         if choise == 'error':
             print('Попробуйте еще раз.')
-        elif choise == 'y':
+        elif choise == 'y': # если пользователь вводит y, выпадает номер от 1 до N
             x = random.randint(1, N)
-            if len(bag) == N and x in bag:
-                print('В мешке больше нет бочонков.')
+            if len(bag) == N and x in bag: # Если в списке уже есть x и его длина = N,    
+                print('В мешке больше нет бочонков.') # то выводится сообщение о том, что в мешке не осталось номеров
                 continue   
-            elif x not in bag:
-                bag.append(x)
+            elif x not in bag: # если в мешке еще нет x, то x добавляется в список
+                bag.append(x) # x добавляется в список
                 print('Выпавший номер бочонка:', x)
-            elif x in bag:
-                while x in bag:
+            elif x in bag: # Если в списке уже есть x, но его длина не равна N
+                while x in bag: #то подбирается такое x, которого еще нет в мешке
                     x = random.randint(1, N)
-                bag.append(x)
+                bag.append(x) # x добавляется в список
                 print('Выпавший номер бочонка:', x)
-        elif choise == 'n':
+        elif choise == 'n': # если пользователь вводит n, то цикл прекращается, программа просит опять ввести N
             break
-        
