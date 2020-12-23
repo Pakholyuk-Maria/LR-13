@@ -17,7 +17,7 @@ while True :
     elif N == 0 :   
         break
     bag = []
-    choise = ''
+    choise = ' '
     while choise != 'n':
         try:    
             choise = input('''Если хотите вытянуть бочонок, введите "y"
